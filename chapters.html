@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapters — koindian</title>
+<meta name="description" content="10 chapters, 21 lessons — Hangul basics through beginner grammar, explained in Hindi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav"></nav>
+
+<header class="hero" style="padding:52px 0 60px;">
+  <div class="wrap" style="grid-template-columns:1fr;">
+    <div>
+      <div class="eyebrow" style="color:var(--marigold);">Beginner Course · शुरुआती कोर्स</div>
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);">10 Chapters, in order</h1>
+      <p class="lede">हांगुल की बुनियाद से शुरू करके अभिवादन, संख्या, परिवार, भोजन और मूल व्याकरण तक — क्रम से पढ़ें।</p>
+    </div>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="search-box" style="margin-bottom:32px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="chapter-search" placeholder="पाठ खोजें... (search lessons)">
+    </div>
+    <div class="acc-list" id="chapter-list"></div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const listEl = document.getElementById("chapter-list");
+
+  function lessonRowHTML(chapter, lesson, idx) {
+    return `
+      <div>
+        <div class="lesson-row" onclick="toggleLessonDetail(this)">
+          <span class="dot"></span>
+          <div style="flex:1;">
+            <div class="en">${idx + 1}. ${lesson.title}</div>
+            <div class="ko kr">${lesson.titleKo}</div>
+          </div>
+        </div>
+        <div class="lesson-detail">
+          <span class="explain-label">Explanation · व्याख्या</span>
+          <p class="explain hi">${lesson.explanationHi}</p>
+          ${lesson.examples.map(ex => `
+            <div class="example-bubble">
+              <div class="ko kr">${ex.ko}</div>
+              <div class="hi">${ex.hi}</div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function render(filter) {
+    const f = (filter || "").trim().toLowerCase();
+    listEl.innerHTML = "";
+    KOIND.chapters.forEach((chapter) => {
+      const matchingLessons = chapter.lessons.filter(l =>
+        !f ||
+        l.title.toLowerCase().includes(f) ||
+        l.titleKo.includes(filter || "") ||
+        l.explanationHi.includes(filter || "")
+      );
+      if (f && matchingLessons.length === 0) return;
+
+      const item = document.createElement("div");
+      item.className = "acc-item" + (f ? " open" : "");
+      item.innerHTML = `
+        <button class="acc-trigger" onclick="toggleAccordion(this)" aria-expanded="${f ? "true" : "false"}">
+          <span class="acc-number">${chapter.number}</span>
+          <span class="acc-title">
+            <span class="en">${chapter.title}</span>
+            <span class="ko kr">${chapter.titleKo}</span>
+          </span>
+          <svg class="acc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            ${matchingLessons.map((l, i) => lessonRowHTML(chapter, l, chapter.lessons.indexOf(l))).join("")}
+          </div>
+        </div>
+      `;
+      listEl.appendChild(item);
+    });
+    if (listEl.children.length === 0) {
+      listEl.innerHTML = `<div class="empty-state"><p class="hi">कोई पाठ नहीं मिला।</p></div>`;
+    }
+  }
+
+  render("");
+  document.getElementById("chapter-search").addEventListener("input", (e) => render(e.target.value));
+});
+</script>
+</body>
+</html>

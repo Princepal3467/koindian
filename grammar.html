@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar — koindian</title>
+<meta name="description" content="14 grammar lessons with simple and complex example sentences, plus a 5-question practice quiz on every lesson.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav"></nav>
+
+<header class="hero" style="padding:52px 0 60px;">
+  <div class="wrap" style="grid-template-columns:1fr;">
+    <div>
+      <div class="eyebrow" style="color:var(--marigold);">Grammar · व्याकरण</div>
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem);">14 lessons, 15 examples each</h1>
+      <p class="lede">हर पाठ में सरल (simple) और जटिल (complex) दोनों तरह के वाक्य, और अंत में 5 सवालों का अभ्यास।</p>
+    </div>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="search-box" style="margin-bottom:32px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="grammar-search" placeholder="व्याकरण खोजें... (e.g. particle, tense)">
+    </div>
+    <div class="acc-list" id="grammar-list"></div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const listEl = document.getElementById("grammar-list");
+  const searchEl = document.getElementById("grammar-search");
+
+  function exampleGroupHTML(title, colorVar, examples) {
+    if (examples.length === 0) return "";
+    return `
+      <div style="margin-bottom:18px;">
+        <span class="explain-label" style="color:${colorVar};">${title}</span>
+        ${examples.map(ex => `
+          <div class="example-bubble">
+            <div class="ko kr">${ex.ko}</div>
+            <div class="hi">${ex.hi}</div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function render(filter) {
+    const f = (filter || "").trim().toLowerCase();
+    const lessons = KOIND.grammarLessons.filter(g =>
+      !f ||
+      g.title.toLowerCase().includes(f) ||
+      g.titleParen.includes(filter || "") ||
+      g.explanationHi.includes(filter || "")
+    );
+
+    listEl.innerHTML = "";
+    lessons.forEach((lesson) => {
+      const simple = lesson.examples.filter(e => e.level !== "complex" && e.level !== "medium");
+      const medium = lesson.examples.filter(e => e.level === "medium");
+      const complex = lesson.examples.filter(e => e.level === "complex");
+
+      const item = document.createElement("div");
+      item.className = "acc-item" + (f ? " open" : "");
+      item.innerHTML = `
+        <button class="acc-trigger" onclick="toggleAccordion(this)" aria-expanded="${f ? "true" : "false"}">
+          <span class="acc-number">${lesson.number}</span>
+          <span class="acc-title">
+            <span class="en">${lesson.title}</span>
+            <span class="ko kr">${lesson.titleParen}</span>
+          </span>
+          <svg class="acc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <span class="explain-label">Explanation · व्याख्या</span>
+            <p class="explain hi">${lesson.explanationHi}</p>
+            ${exampleGroupHTML("Simple Sentences · सरल वाक्य", "var(--jade)", simple)}
+            ${exampleGroupHTML("Medium Sentences · मध्यम वाक्य", "var(--marigold)", medium)}
+            ${exampleGroupHTML("Complex Sentences · जटिल वाक्य", "var(--red)", complex)}
+            <div class="quiz-box" id="quiz-${lesson.id}"></div>
+          </div>
+        </div>
+      `;
+      listEl.appendChild(item);
+      buildQuiz(item.querySelector(`#quiz-${lesson.id}`), lesson);
+    });
+
+    if (listEl.children.length === 0) {
+      listEl.innerHTML = `<div class="empty-state"><p class="hi">कोई व्याकरण पाठ नहीं मिला।</p></div>`;
+    }
+  }
+
+  render("");
+  searchEl.addEventListener("input", (e) => render(e.target.value));
+});
+</script>
+</body>
+</html>
