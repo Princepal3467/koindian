@@ -1,6 +1,6 @@
-# koind website
+# koindian website
 
-A static, framework-free website (plain HTML/CSS/JS) showcasing the koind Korean-through-Hindi course. No build step, no npm — just open `index.html` in a browser.
+A static, framework-free website (plain HTML/CSS/JS) showcasing the koindian Korean-through-Hindi course. No build step, no npm — just open `index.html` in a browser.
 
 ## Pages
 - `index.html` — home, with an animated Hangul syllable-block hero and a live lesson preview

@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeCategory = "all";
 
   function renderPills() {
-    const pills = [{ id: "all", title: "All", titleKo: "" }, ...KOIND.vocabularyCategories];
+    const pills = [{ id: "all", title: "All", titleKo: "" }, ...KOINDIAN.vocabularyCategories];
     pillsEl.innerHTML = pills.map(c => `
       <button class="pill ${c.id === activeCategory ? "active" : ""}" data-id="${c.id}">
         ${c.title}${c.titleKo ? ` · ${c.titleKo}` : ""}
@@ -65,8 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderContent() {
     const query = searchEl.value.trim().toLowerCase();
     const categories = activeCategory === "all"
-      ? KOIND.vocabularyCategories
-      : KOIND.vocabularyCategories.filter(c => c.id === activeCategory);
+      ? KOINDIAN.vocabularyCategories
+      : KOINDIAN.vocabularyCategories.filter(c => c.id === activeCategory);
 
     let html = "";
     categories.forEach(cat => {

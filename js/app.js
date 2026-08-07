@@ -1,4 +1,4 @@
-/* koind — shared site behavior */
+/* koindian — shared site behavior */
 
 const NAV_LINKS = [
   { href: "index.html", label: "Home" },
@@ -20,7 +20,7 @@ function renderNav() {
   const page = currentPage();
   mount.innerHTML = `
     <div class="wrap">
-      <a href="index.html" class="wordmark">koind<span class="dot">.</span></a>
+      <a href="index.html" class="wordmark">koindian<span class="dot">.</span></a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -46,7 +46,7 @@ function renderFooter() {
     <div class="wrap">
       <div class="footer-top">
         <div>
-          <div class="footer-wordmark">koind<span style="color:var(--red)">.</span></div>
+          <div class="footer-wordmark">koindian<span style="color:var(--red)">.</span></div>
           <p style="max-width:32ch;color:rgba(246,240,228,0.6);font-size:0.9rem;">Korean सीखें हिंदी में — a Hindi-first Korean course, built lesson by lesson.</p>
         </div>
         <div class="footer-cols">
@@ -65,7 +65,7 @@ function renderFooter() {
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© ${new Date().getFullYear()} koind. All content written from scratch for Hindi-speaking learners.</span>
+        <span>© ${new Date().getFullYear()} koindian. All content written from scratch for Hindi-speaking learners.</span>
         <span>ज्ञान • अभ्यास • प्रगति</span>
       </div>
     </div>
@@ -95,7 +95,7 @@ function toggleLessonDetail(el) {
 
 /* ---------------- Simple localStorage helpers (bookmarks) ---------------- */
 
-const STORE_KEY = "koind_bookmarks_v1";
+const STORE_KEY = "koindian_bookmarks_v1";
 
 function getBookmarks() {
   try {

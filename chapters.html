@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function render(filter) {
     const f = (filter || "").trim().toLowerCase();
     listEl.innerHTML = "";
-    KOIND.chapters.forEach((chapter) => {
+    KOINDIAN.chapters.forEach((chapter) => {
       const matchingLessons = chapter.lessons.filter(l =>
         !f ||
         l.title.toLowerCase().includes(f) ||

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — koindian</title>
-<meta name="description" content="Get in touch with the koind team.">
+<meta name="description" content="Get in touch with the koindian team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -61,13 +61,13 @@
         <div class="contact-line">
           <div>
             <div class="label">Email</div>
-            <div class="value">Koindian2@gmail.com<span class="placeholder-tag"></span></div>
+            <div class="value">koindian2@gmail.com<span class="placeholder-tag"></span></div>
           </div>
         </div>
         <div class="contact-line">
           <div>
             <div class="label">Phone</div>
-            <div class="value">204 598 0451<span class="placeholder-tag"></span></div>
+            <div class="value">+1 204 598 0451<span class="placeholder-tag"></span></div>
           </div>
         </div>
         <div class="contact-line">
@@ -83,7 +83,8 @@
           </div>
         </div>
       </div>
-      <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin-top:16px;"> Thanks FoR Contacting Us.
+      <p style="font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-soft);margin-top:16px;">
+        Thanks For Contact Us!
       </p>
     </div>
   </div>
@@ -101,7 +102,7 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
   const topic = document.getElementById("topic").value;
   const message = document.getElementById("message").value;
   const to = "hello@example.com"; // TODO: replace with your real address
-  const subject = encodeURIComponent(`koind contact — ${topic}`);
+  const subject = encodeURIComponent(`koindian contact — ${topic}`);
   const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
   window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
 });

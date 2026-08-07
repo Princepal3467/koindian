@@ -35,7 +35,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const mount = document.getElementById("sentence-groups");
-  mount.innerHTML = KOIND.dailySentenceGroups.map(group => `
+  mount.innerHTML = KOINDIAN.dailySentenceGroups.map(group => `
     <div style="margin-bottom:40px;">
       <h3 style="font-size:1.15rem;margin-bottom:14px;">${group.title} <span class="kr" style="color:var(--plum);font-size:1rem;font-weight:500;">${group.titleKo}</span></h3>
       ${group.sentences.map(s => `

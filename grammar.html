@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function render(filter) {
     const f = (filter || "").trim().toLowerCase();
-    const lessons = KOIND.grammarLessons.filter(g =>
+    const lessons = KOINDIAN.grammarLessons.filter(g =>
       !f ||
       g.title.toLowerCase().includes(f) ||
       g.titleParen.includes(filter || "") ||
